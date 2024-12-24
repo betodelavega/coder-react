@@ -1,18 +1,13 @@
-import React from 'react'
-import NavBar from './components/navbar/NavBar'
+import NavBar from './components/navbar/NavBar';
 
 const App = () => {
-
-
-
   return (
     <>
-    {/*Preentrega*/}
+      {/*Preentrega*/}
 
-    <NavBar/>
-    
+      <NavBar />
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;
