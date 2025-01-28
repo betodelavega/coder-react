@@ -13,7 +13,11 @@ export default CartWidget; */
 import PropTypes from 'prop-types';
 
 const CartWidget = ({ itemCount }) => {
-  return <button>CartWidget: {itemCount}</button>;
+  return (
+    <button type='button' className='btn btn-primary'>
+      CartWidget {itemCount}
+    </button>
+  );
 };
 
 // Validación de props con PropTypes
@@ -22,3 +26,4 @@ CartWidget.propTypes = {
 };
 
 export default CartWidget;
+
