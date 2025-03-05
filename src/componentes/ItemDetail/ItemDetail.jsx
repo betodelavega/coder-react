@@ -1,50 +1,55 @@
 import { useState } from 'react';
 import Contador from '../Contador/Contador';
 import { Link } from 'react-router-dom';
-import './ItemDetail.css'
+import './ItemDetail.css';
 
 import { CarritoContext } from '../../context/CarritoContext';
 import { useContext } from 'react';
 import { toast } from 'react-toastify';
 
-const ItemDetail = ({ id, nombre, stock, precio, img, descripcion }) => {
+const ItemDetail = ({ item }) => {
+  const { agregarAlCarrito } = useContext(CarritoContext);
 
-  const {agregarAlCarrito} = useContext(CarritoContext)
-
-  //Creamos un estado local con la cantidad de productos agregados. 
+  //Creamos un estado local con la cantidad de productos agregados.
   const [agregarCantidad, setAgregarCantidad] = useState(0);
 
-  //Creamos una función manejadora de la cantidad: 
+  //Creamos una función manejadora de la cantidad:
 
   const manejadorCantidad = (cantidad) => {
     setAgregarCantidad(cantidad);
 
-    const item = {id,nombre, precio}
-    agregarAlCarrito(item,cantidad)
-    toast.success("Su compra fue enviada al carrito", {autoClose: 1000,theme: "dark", position: "top-center"})
-  }
-
+    const itemCart = { id: item.id, nombre: item.nombre, precio: item.precio };
+    agregarAlCarrito(itemCart, cantidad);
+    toast.success('Su compra fue enviada al carrito', {
+      autoClose: 1000,
+      theme: 'dark',
+      position: 'top-center',
+    });
+  };
 
   return (
     <div className='contenedorItem'>
-      <h2>Nombre: {nombre} </h2>
-      <h3>Precio: {precio} </h3>
-      <h3>ID: {id} </h3>
-      <img src={img} alt={nombre} />
-      <p> {descripcion}</p>
+      <h2>Nombre: {item.nombre} </h2>
+      <h3>Precio: {item.precio} </h3>
+      <h3>ID: {item.id} </h3>
+      <img src={item.img} alt={item.nombre} />
+      <p> {item.descripcion}</p>
 
       {
         //Acá empleamos la lógica de montaje y desmontaje del contador
       }
 
-      {
-        agregarCantidad > 0 ? (<Link to="/cart">Terminar Compra</Link>) : (<Contador inicial={1} stock={stock} funcionAgregar={manejadorCantidad}/>)
-      }
-
-
-
+      {agregarCantidad > 0 ? (
+        <Link to='/cart'>Terminar Compra</Link>
+      ) : (
+        <Contador
+          inicial={1}
+          stock={item.stock}
+          funcionAgregar={manejadorCantidad}
+        />
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default ItemDetail
+export default ItemDetail;

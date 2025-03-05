@@ -109,12 +109,13 @@ const productos = [
 import { collection, doc, writeBatch } from "firebase/firestore";
 
 const subirProductos = async (productos) => {
-  const batch = writeBatch(db);
-  productos.forEach((obj) => {
-    const docRef = doc(collection(db, "productos"));
-    batch.set(docRef, obj);
-  });
-  await batch.commit();
+  console.log('SUBIR PRODUCTOS');
+  // const batch = writeBatch(db);
+  // productos.forEach((obj) => {
+  //   const docRef = doc(collection(db, "productos"));
+  //   batch.set(docRef, obj);
+  // });
+  // await batch.commit();
   console.log("Productos subidos a Firebase");
 };
 
